@@ -1,32 +1,57 @@
-import React from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const links = ["Home", "About", "Skills", "Projects", "Contact"];
+
   return (
-    <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[80%] bg-black/90 text-white rounded-3xl shadow-lg flex items-center justify-between px-8 py-3 z-50 backdrop-blur-md">
-      {/* Logo / Name */}
-      <div className="text-xl font-semibold tracking-wide">
-        Akshit<span className="text-blue-400">.</span>
+    <motion.nav
+      className="fixed top-0 w-full bg-black/40 backdrop-blur-xl border-b border-gray-800 z-50"
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+        <h1 className="text-2xl font-bold text-cyan-400 tracking-wide">
+          Akshit<span className="text-gray-300">.dev</span>
+        </h1>
+
+        <ul className="hidden md:flex space-x-8 text-gray-300 font-medium">
+          {links.map(link => (
+            <a
+              key={link}
+              href={`#${link.toLowerCase()}`}
+              className="hover:text-cyan-400 transition duration-300"
+            >
+              {link}
+            </a>
+          ))}
+        </ul>
+
+        <button
+          onClick={() => setOpen(!open)}
+          className="text-white text-2xl md:hidden"
+        >
+          ☰
+        </button>
       </div>
 
-      {/* Center Nav Links */}
-      <ul className="hidden md:flex space-x-10 text-sm font-medium">
-        <li className="hover:text-blue-400 cursor-pointer transition">Home</li>
-        <li className="hover:text-blue-400 cursor-pointer transition">About</li>
-        <li className="hover:text-blue-400 cursor-pointer transition">Skills</li>
-        <li className="hover:text-blue-400 cursor-pointer transition">Projects</li>
-        <li className="hover:text-blue-400 cursor-pointer transition">Contact</li>
-      </ul>
-
-      {/* Right Button */}
-      <a
-        href="/resume.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="ml-4 bg-transparent border border-blue-400 text-blue-400 px-5 py-1.5 rounded-full text-sm hover:bg-blue-400 hover:text-black transition-all duration-300"
-      >
-        Resume
-      </a>
-    </nav>
+      {open && (
+        <div className="md:hidden bg-black/90 text-center py-3 space-y-2 border-t border-gray-800">
+          {links.map(link => (
+            <a
+              key={link}
+              href={`#${link.toLowerCase()}`}
+              onClick={() => setOpen(false)}
+              className="block py-2 text-gray-300 hover:text-cyan-400"
+            >
+              {link}
+            </a>
+          ))}
+        </div>
+      )}
+    </motion.nav>
   );
 };
 

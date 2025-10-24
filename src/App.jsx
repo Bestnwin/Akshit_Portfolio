@@ -1,24 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Navbar from './components/Navbar'
-import './App.css'
+
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import "./styles/globals.css";
 
 function App() {
-
   return (
-    <>
-  <body className='bg-yellow' >
+    <div className="bg-[#050505] text-gray-200 scroll-smooth">
       <Navbar />
-      {/* <Hero />
+      <Hero />
       <About />
       <Skills />
       <Projects />
       <Contact />
-      <Footer /> */}
-    </body>
-    </>
-  )
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;
